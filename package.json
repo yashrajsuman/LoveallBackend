@@ -1,0 +1,19 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Himanshuraj677/loveall-backend.git"
+  },
+  "author": "Himanshu Raj",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Himanshuraj677/loveall-backend/issues"
+  },
+  "homepage": "https://github.com/Himanshuraj677/loveall-backend#readme",
+  "description": ""
+}
