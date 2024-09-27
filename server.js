@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import http from 'http';
 import authRoute from './routes/authRoute.js'; // Use .js extension for ES Modules
 import rateLimit from 'express-rate-limit';
+import errorHandler from './middleware/errorHandler.js';
 
 // Dotenv configuration
 dotenv.config();
@@ -30,6 +31,9 @@ app.get('/test', (req, res) => {
     res.send("Hello World");
 });
 app.use('/auth', authRoute);
+
+// Error handler Middleware
+app.use(errorHandler);
 
 // HTTP server creation
 const port = process.env.PORT || 3000;
