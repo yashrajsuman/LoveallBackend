@@ -1,7 +1,7 @@
 import MAIL_TEMPLATE from "../config/mailTemplate.js"
 import transporter from "../config/mailConfig.js";
 
-const sendMail = (otp, to) => {
+const sendMail = (otp, to, subject) => {
     const options = {
         from: process.env.EMAIL, // sender address
         to, // receiver email
@@ -11,7 +11,10 @@ const sendMail = (otp, to) => {
     }
     transporter.sendMail(options, (error, info) => {
         if (error) {
-            return console.log('Error occurred: ' + error.message);
+            console.error(error)
+            const error = new Error("Error in sending otp. Kindly resend the otp.")
+            error.status = 500;
+            return next(error);
         }
         console.log('Email sent: ' + info.response);
     });
