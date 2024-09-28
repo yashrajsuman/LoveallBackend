@@ -1,4 +1,3 @@
-// server.js
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -41,6 +40,7 @@ const server = http.createServer(app);
 server.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
+
 
 // Default export for the app
 export default app;
