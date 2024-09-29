@@ -7,7 +7,7 @@ const authMiddleware = async (req, res, next) => {
         return res.status(403).json({message: "No token provided", redirectTo: "login"});
     }
     try {
-        const decoded = verifyJWT(token);
+        const decoded = await verifyJWT(token);
         const user = await User.findByPk(decoded.user_id);
         if (!user) {
             return res.status(403).json({
