@@ -4,6 +4,7 @@ import User from "../models/user.js";
 import { hashPassword } from "../services/passwordHash.js";
 import generateOTP from "../services/otpGenerator.js";
 import sendMail from "../services/sendMail.js";
+import { createJWT } from "../services/jwt.js";
 
 const register = async (req, res, next) => {
   const { first_name, last_name, email, phone_number, password } = req.body;
@@ -61,16 +62,25 @@ const register = async (req, res, next) => {
     const expiration_time = process.env.OTP_EXPIRATION_TIME || 10;
     const otp_expiration_time = new Date(current_time.getTime() + expiration_time * 60000);
 
+    
     // Adding user into the database
     const newUser = await User.create({
-      first_name,
-      last_name,
-      email,
-      phone_number,
-      password_hash,
-      otp,
-      otp_expiration_time,
+        first_name,
+        last_name,
+        email,
+        phone_number,
+        password_hash,
+        otp,
+        otp_expiration_time,
     });
+    
+    // Generate json web token
+    const payload = {
+        id: newUser.user_id,
+        email: newUser.email
+    }
+    const token = createJWT(payload);
+
 
     // Sending otp to client
     const subject = "OTP verification"
@@ -86,6 +96,7 @@ const register = async (req, res, next) => {
         email: newUser.email,
         phone_number: newUser.phone_number,
       },
+      token
     });
   } catch (error) {
     console.error("registercontroller\n" + error);
