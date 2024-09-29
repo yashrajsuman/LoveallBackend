@@ -9,9 +9,9 @@ const sendMail = (otp, to, subject) => {
         text: otp,
         html: MAIL_TEMPLATE(otp),
     }
-    transporter.sendMail(options, (error, info) => {
-        if (error) {
-            console.error(error)
+    transporter.sendMail(options, (err, info) => {
+        if (err) {
+            console.error(err)
             const error = new Error("Error in sending otp. Kindly resend the otp.")
             error.status = 500;
             return next(error);
