@@ -10,7 +10,7 @@ const sendOTP = async (req, res, next) => {
         if (!email || !validator.isEmail(email)) {
             return res.status(400).json({success: false, message: "Kindly enter the valid email"});
         }
-        const user = await User.findOne({email});
+        const user = await User.findOne({where: {email}});
 
         // check if user exist
         if (!user) {

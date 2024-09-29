@@ -11,13 +11,9 @@ const hashPassword = async (password) => {
     }
 }
 
-const comparePassword = async (password) => {
-    try {
-        const match = await bcrypt.compare(password, hash);
-        return match;
-    } catch (error) {
-        return new Error("Internal Server error.");
-    }
+const comparePassword = async (password, hash) => {
+    const match = await bcrypt.compare(password, hash);
+    return match;
 }
 
 export {hashPassword, comparePassword};
