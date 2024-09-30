@@ -1,7 +1,7 @@
 import MAIL_TEMPLATE from "../config/mailTemplate.js"
 import transporter from "../config/mailConfig.js";
 
-const sendMail = (otp, to, subject) => {
+const sendMail = async (otp, to, subject) => {
     const options = {
         from: process.env.EMAIL, // sender address
         to, // receiver email
@@ -9,15 +9,13 @@ const sendMail = (otp, to, subject) => {
         text: otp,
         html: MAIL_TEMPLATE(otp),
     }
-    transporter.sendMail(options, (error, info) => {
-        if (error) {
-            console.error(error)
-            const error = new Error("Error in sending otp. Kindly resend the otp.")
-            error.status = 500;
-            return next(error);
-        }
+    try {
+        const info = await transporter.sendMail(options);  // Await the result of sendMail
         console.log('Email sent: ' + info.response);
-    });
+    } catch (err) {
+        console.log("I am getting error in the sendMail");
+        throw new Error("Error in sending OTP. Kindly resend the OTP.");
+    }
 }
 
 export default sendMail;

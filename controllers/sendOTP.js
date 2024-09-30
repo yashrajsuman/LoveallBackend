@@ -30,7 +30,7 @@ const sendOTP = async (req, res, next) => {
             {where: {email}}
         )
         const subject = "OTP verification"
-        sendMail(otp, email, subject);
+        await sendMail(otp, email, subject);
         return res.status(201).json({success: true, message: "Kindly verify the OTP"});
     } catch (error) {
         return next(error);
