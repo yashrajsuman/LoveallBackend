@@ -31,7 +31,7 @@ const register = async (req, res, next) => {
   }
   else if (!validator.isEmail(email)) {
     errorMessage = "Please enter a valid email.";
-  } else if (!validator.isMobilePhone(phone_number) || phone_number.length !== 10 || phone_number !== 0) {
+  } else if (!validator.isMobilePhone(phone_number) || phone_number.length !== 10 || phone_number == 0) {
     errorMessage = "Please enter a valid 10-digit phone number.";
   } else if (!validator.isStrongPassword(password, passwordReqirement)) {
     errorMessage =
