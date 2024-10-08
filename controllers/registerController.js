@@ -22,9 +22,16 @@ const register = async (req, res, next) => {
   // Validate fields and build an error message
   if (!first_name || !last_name || !email || !phone_number || !password) {
     errorMessage = "All fields are compulsory.";
-  } else if (!validator.isEmail(email)) {
+  }
+  else if(!validator.isAlpha(first_name) || !validator.isAlpha(last_name) ){
+    errorMessage = "Only alphabets are allowed.";
+  }
+  else if(first_name.length >= 10 || last_name.length >= 10){
+    errorMessage = "More than 10 character are not allowed.";
+  }
+  else if (!validator.isEmail(email)) {
     errorMessage = "Please enter a valid email.";
-  } else if (!validator.isNumeric(phone_number) || phone_number.length !== 10) {
+  } else if (!validator.isMobilePhone(phone_number) || phone_number.length !== 10 || phone_number == 0) {
     errorMessage = "Please enter a valid 10-digit phone number.";
   } else if (!validator.isStrongPassword(password, passwordReqirement)) {
     errorMessage =
