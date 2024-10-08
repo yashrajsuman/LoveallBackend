@@ -46,11 +46,11 @@ const User = sequelize.define('users', {
         type: DataTypes.DATE
     },
     'created_at': {
-        type: DataTypes.TIME,
+        type: DataTypes.DATE,
         defaultValue: DataTypes.NOW
     },
     'updated_at': {
-        type: DataTypes.TIME,
+        type: DataTypes.DATE,
         defaultValue: DataTypes.NOW
     },
     'referral_id': {

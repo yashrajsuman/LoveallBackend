@@ -1,6 +1,6 @@
 import validator from "validator";
 import { Op } from "sequelize";
-import User from "../models/user.js";
+import {User} from '../models/association.js'
 import { hashPassword } from "../services/passwordHash.js";
 import generateOTP from "../services/otpGenerator.js";
 import sendMail from "../services/sendMail.js";

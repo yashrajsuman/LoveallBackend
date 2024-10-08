@@ -1,4 +1,4 @@
-import User from "../models/user.js";
+import {User} from '../models/association.js'
 const verifyOtp = async (req, res, next) => {
     try {
         const {email, otp} = req.body;

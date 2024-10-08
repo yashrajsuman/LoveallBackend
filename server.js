@@ -2,9 +2,11 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import http from 'http';
-import authRoute from './routes/authRoute.js'; // Use .js extension for ES Modules
+import authRoute from './routes/authRoute.js';
+import userRoute from './routes/userRoute.js'
 import rateLimit from 'express-rate-limit';
 import errorHandler from './middleware/errorHandler.js';
+import { authMiddleware } from './middleware/isAuthenticated.js';
 
 // Dotenv configuration
 dotenv.config();
@@ -29,7 +31,9 @@ app.use(limiter);
 app.get('/test', (req, res) => {
     res.send("Hello World");
 });
-app.use('/auth', authRoute);
+app.use('/api/auth', authRoute);
+app.use('/api/user', userRoute);
+app.use(authMiddleware);
 
 // Error handler Middleware
 app.use(errorHandler);

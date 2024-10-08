@@ -1,28 +1,35 @@
-import User from "../models/user.js";
+import User from "../models/user.model.js";
 import { verifyJWT } from "../services/jwt.js";
 
 const authMiddleware = async (req, res, next) => {
-    const token = req.headers['authorization'];
-    if (!token) {
-        return res.status(403).json({message: "No token provided", redirectTo: "login"});
-    }
+    const authorization = req.headers['authorization'];
+    if (!authMiddleware) next();
+    const token = authorization.split(' ')[1];
     try {
         const decoded = await verifyJWT(token);
-        const user = await User.findByPk(decoded.user_id);
-        if (!user) {
-            return res.status(403).json({
-                message: "Unauthorized! Kindly register",
-                redirectTo: "register"
-            });
+        const user = await User.findByPk(decoded.id);
+        if (user) {
+            req.user = decoded;
+            next();
         }
-        req.user = decoded;
-        next();
+        
     }
     catch (error) {
+        console.log(error)
         return res.status(403).json({
             message: "Unauthorized! Kindly register",
             redirectTo: "register"
         });
     }
 }
-export default authMiddleware;
+
+const loginAuth = (req, res, next) => {
+    const token = req.headers['authorization'];
+    if (!token) {
+        return res.status(403).json({message: "No token provided", redirectTo: "login"});
+    }
+    else {
+        return res.status(200).json({success: true, message: "Login Successfully"});
+    }
+}
+export {authMiddleware, loginAuth};

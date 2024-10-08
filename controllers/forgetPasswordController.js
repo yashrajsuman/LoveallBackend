@@ -1,4 +1,4 @@
-import User from "../models/user.js";
+import {User} from '../models/association.js'
 import validator from "validator";
 import { hashPassword } from "../services/passwordHash.js";
 

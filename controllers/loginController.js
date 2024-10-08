@@ -1,4 +1,4 @@
-import User from "../models/user.js";
+import {User} from '../models/association.js'
 import { createJWT } from "../services/jwt.js";
 import { comparePassword } from "../services/passwordHash.js";
 

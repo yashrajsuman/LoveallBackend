@@ -1,4 +1,4 @@
-import User from "../models/user.js";
+import {User} from '../models/association.js'
 import generateOTP from "../services/otpGenerator.js";
 import sendMail from "../services/sendMail.js";
 import validator from "validator";
