@@ -44,13 +44,32 @@ const Store = sequelize.define('stores', {
     'address': {
         type: DataTypes.STRING
     },
+    'latitude': {
+        type: DataTypes.DECIMAL(10, 8)
+    },
+    'longitude': {
+        type: DataTypes.DECIMAL(11, 8)
+    },
+    'category': {
+        type: DataTypes.STRING(50)
+    },
+    'rating': {
+        type: DataTypes.DECIMAL(2, 1)
+    },
+    'opening_hours': {
+        type: DataTypes.STRING(100)
+    },
+    'status': {
+        type: DataTypes.ENUM('active', 'inactive')
+    },
     'created_at': {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW
     },
     'updated_at': {
         type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW
+        defaultValue: DataTypes.NOW,
+        onUpdate: DataTypes.NOW
     }
 }, {
     tableName: 'stores',

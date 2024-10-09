@@ -3,7 +3,7 @@ import { verifyJWT } from "../services/jwt.js";
 
 const authMiddleware = async (req, res, next) => {
     const authorization = req.headers['authorization'];
-    if (!authMiddleware) next();
+    if (!authorization) next();
     const token = authorization.split(' ')[1];
     try {
         const decoded = await verifyJWT(token);

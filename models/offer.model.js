@@ -46,6 +46,20 @@ const Offers = sequelize.define('offers', {
         defaultValue: DataTypes.NOW,
         onUpdate: DataTypes.NOW
     },
+    'terms_conditions': {
+        type: DataTypes.TEXT
+    },
+    'number_of_uses': {
+        type: DataTypes.INTEGER,
+        defaultValue: 0
+    },
+    'limit_per_customer': {
+        type: DataTypes.INTEGER
+    },
+    'featured': {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+    }
 }, {
     tableName: 'offers',
     timestamps: false,
