@@ -7,6 +7,11 @@ const Cards = sequelize.define('cards', {
         primaryKey: true,
         autoIncrement: true
     },
+    'card_number': {
+        type: DataTypes.INTEGER,
+        unique: true,
+        allowNull: false
+    },
     'user_id': {
         type: DataTypes.INTEGER,
         allowNull: false

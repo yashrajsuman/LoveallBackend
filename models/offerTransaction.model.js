@@ -27,10 +27,6 @@ const OfferTransaction = sequelize.define('offer_transaction', {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false
     },
-    'total_amount': {
-        type: DataTypes.DECIMAL(10, 2),
-        allowNull: false
-    },
     'discount_applied': {
         type: DataTypes.DECIMAL(10, 2)
     },

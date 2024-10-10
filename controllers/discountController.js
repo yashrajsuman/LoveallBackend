@@ -1,5 +1,5 @@
-import Store from "../models/store.model.js";
-import Offers from "../models/offer.model.js";
+import {Store} from "../models/association.js";
+import {Offers} from "../models/association.js";
 import { where, Op } from "sequelize";
 const discountController = async (req, res, next) => {
     // category - restaurant, bar, etc.

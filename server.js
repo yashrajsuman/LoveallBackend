@@ -33,7 +33,6 @@ app.get('/test', (req, res) => {
 });
 app.use('/api/auth', authRoute);
 app.use('/api/user', userRoute);
-app.use(authMiddleware);
 
 // Error handler Middleware
 app.use(errorHandler);

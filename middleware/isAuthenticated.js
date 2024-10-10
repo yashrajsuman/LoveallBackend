@@ -3,7 +3,12 @@ import { verifyJWT } from "../services/jwt.js";
 
 const authMiddleware = async (req, res, next) => {
     const authorization = req.headers['authorization'];
-    if (!authorization) next();
+    if (!authorization) {
+        return res.status(403).json({
+            message: "Unauthorized! Kindly register",
+            redirectTo: "register"
+        });
+    };
     const token = authorization.split(' ')[1];
     try {
         const decoded = await verifyJWT(token);
