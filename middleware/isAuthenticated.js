@@ -17,6 +17,12 @@ const authMiddleware = async (req, res, next) => {
             req.user = decoded;
             next();
         }
+        else  {
+            return res.status(403).json({
+                message: "Unauthorized! Kindly register",
+                redirectTo: "register"
+            });
+        }
         
     }
     catch (error) {
