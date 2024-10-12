@@ -28,7 +28,9 @@ const transaction = async(req, res, next) => {
        else {
         return res.status(400).json({success: false, message: "Invalid request"});
        }
+       
        const totalPages = Math.ceil(transactionRecord.count / limit);
+       if (page > totalPages) return res.status(400).json({success: false, message: "Not enough data to show."})
        return res.status(200).json({
             success: true,
             data: transactionRecord.rows,
@@ -46,3 +48,5 @@ const transaction = async(req, res, next) => {
 }
 
 export default transaction;
+
+//add transaction id and which offer is applied

@@ -1,15 +1,16 @@
 import {Store} from "../models/association.js";
 import {Offers} from "../models/association.js";
-import { where, Op } from "sequelize";
+import { where, Op, Sequelize } from "sequelize";
 const discountController = async (req, res, next) => {
     // category - restaurant, bar, etc.
     // search - search query
     // type - discount, buy one get one, etc.
     // rating - rating of stores that present offer
-    // distance - store distamce from the user
+    // distance - store distance from the user
     // discount - % of discount
     // longitude and latitude of end user
     // any other which apply
+    console.log("Test 1")
     try {
         const { category, search, type, rating, distance, discount, longitude, latitude, page = 1, limit = 10 } = req.body;
         
@@ -60,7 +61,6 @@ const discountController = async (req, res, next) => {
                 { discount_percentage: { [Op.like]: `%${search}%` } }
             ];
         }
-
         const {count, rows} = await Offers.findAndCountAll(offerQuery);
 
         // Adding distance field in each store to show the store
@@ -73,6 +73,10 @@ const discountController = async (req, res, next) => {
 
         // Calculating the number of pages
         const totalPages = Math.ceil(count / limit);
+
+        if (!(Number.isInteger(page) && page>=1)) return res.status(400).json({success: false, message: "Invalid page number."})
+            
+        if (page > totalPages) return res.status(400).json({success: false, message: "Not enough data to show."})
         return res.status(200).json({
             success: true,
             data: rows,

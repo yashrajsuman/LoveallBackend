@@ -10,12 +10,19 @@ const authMiddleware = async (req, res, next) => {
         });
     };
     const token = authorization.split(' ')[1];
+    console.log("Test2")
     try {
         const decoded = await verifyJWT(token);
         const user = await User.findByPk(decoded.id);
         if (user) {
             req.user = decoded;
             next();
+        }
+        else {
+            return res.status(403).json({
+                message: "Unauthorized! Kindly register",
+                redirectTo: "register"
+            });
         }
         
     }

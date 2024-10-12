@@ -5,7 +5,6 @@ import { authMiddleware } from "../middleware/isAuthenticated.js";
 import feedback from "../controllers/feedback.controller.js";
 
 const router = Router();
-
 router.get('/discount', discountController);
 router.get('/dashboard',authMiddleware, transaction);
 router.post('/feedback', authMiddleware, feedback)
