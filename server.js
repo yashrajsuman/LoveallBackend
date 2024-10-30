@@ -3,7 +3,8 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import http from 'http';
 import authRoute from './routes/authRoute.js';
-import userRoute from './routes/userRoute.js'
+import userRoute from './routes/userRoute.js';
+import BRoute from './routes/BusinessAuthRoute.js';
 import rateLimit from 'express-rate-limit';
 import errorHandler from './middleware/errorHandler.js';
 import { authMiddleware } from './middleware/isAuthenticated.js';
@@ -33,6 +34,7 @@ app.get('/test', (req, res) => {
 });
 app.use('/api/auth', authRoute);
 app.use('/api/user', userRoute);
+app.use('/api/Buss', BRoute);
 
 // Error handler Middleware
 app.use(errorHandler);

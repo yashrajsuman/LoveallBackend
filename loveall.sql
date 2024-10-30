@@ -19,6 +19,7 @@ CREATE TABLE users (
 );
 ALTER TABLE users ADD COLUMN verified BOOLEAN DEFAULT FALSE;
 
+
 -- 2. stores
 CREATE TABLE stores (
     store_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -43,7 +44,7 @@ CREATE TABLE admin (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     otp VARCHAR(10),
-    otp_expiration_time TIMESTAMP
+   -- otp_expiration_time TIMESTAMP
 );
 
 -- 4. user_activity_log
@@ -162,5 +163,25 @@ CREATE TABLE otps (
     ip_address VARCHAR(45),
     
     INDEX(email)
+);
+
+--Business owner
+CREATE TABLE business (
+    business_id INT AUTO_INCREMENT PRIMARY KEY,
+    business_name VARCHAR(255) NOT NULL,
+    business_email VARCHAR(255) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    business_type VARCHAR(100) NOT NULL,
+    entity_type VARCHAR(100) NOT NULL,
+    contact_number VARCHAR(15) NOT NULL,
+    business_address VARCHAR(255),
+    gstin VARCHAR(15),
+    tan VARCHAR(15),
+    business_purpose TEXT,
+    owner_name VARCHAR(255) NOT NULL,
+    owner_contact_number VARCHAR(15) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    verified BOOLEAN DEFAULT FALSE
 );
 
