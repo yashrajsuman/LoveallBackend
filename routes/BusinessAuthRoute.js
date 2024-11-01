@@ -8,6 +8,7 @@ import businessSendOTP from '../controllers/BSendOtp.js';
 import manualverify from '../controllers/manualverification.js';
 import changePassword from '../controllers/BChangePassword.js';
 
+
 const router = Router(); // Instantiate the Router
 
 // Define the route and associate it with the controller
@@ -18,6 +19,7 @@ router.post('/verify-otp', businessVerifyOtp);    // Business Verify OTP route
 router.post('/send-otp', businessSendOTP);        // Business Send OTP route
 router.post('/manualverify', manualverify);        // Business Send OTP route
 router.post('/ChangePass', changePassword);        // Business Send OTP route
+
 
 // Export the router as the default export
 export default router;

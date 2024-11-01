@@ -45,7 +45,7 @@ const forgetPasswordBusiness = async (req, res, next) => {
         
         // Update the business password
         const [updatedBusiness] = await Business.update(
-            { password_hash, otp: null },
+            { password_hash, otp: null,temp_pass:false },
             { where: { business_email } }
         );
 

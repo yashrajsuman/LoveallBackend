@@ -1,7 +1,7 @@
 import validator from "validator";
 import { Op } from "sequelize";
 import { Business } from '../models/association.js';
-import { hashPassword } from "../services/passwordHash.js";
+//import { hashPassword } from "../services/passwordHash.js";
 import generateOTP from "../services/otpGenerator.js";
 import sendMail from "../services/sendMail.js";
 import { createJWT } from "../services/jwt.js";
@@ -107,6 +107,8 @@ const registerBusiness = async (req, res, next) => {
     // Send OTP to the business email
     const subject = "OTP Verification for Business Registration";
     sendMail(otp, business_email, subject);
+
+    
 
     // Sending response back to the client
     res.status(201).json({

@@ -185,3 +185,42 @@ CREATE TABLE business (
     verified BOOLEAN DEFAULT FALSE
 );
 
+
+CREATE TABLE businesses (
+    business_id SERIAL PRIMARY KEY,
+    business_name VARCHAR(255) NOT NULL,
+    business_email VARCHAR(255) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    business_type VARCHAR(100),
+    entity_type VARCHAR(100),
+    contact_number VARCHAR(20),
+    business_address TEXT,
+    gstin VARCHAR(15) UNIQUE,
+    tan VARCHAR(10) UNIQUE,
+    business_purpose TEXT,
+    owner_name VARCHAR(255),
+    owner_contact_number VARCHAR(20),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    verified BOOLEAN DEFAULT FALSE,
+    manual_verified BOOLEAN DEFAULT FALSE,
+    otp VARCHAR(6),
+    otp_expiration_time TIMESTAMP,
+    temp_pass BOOLEAN DEFAULT FALSE
+);
+
+-- Trigger to update 'updated_at' field automatically
+CREATE OR REPLACE FUNCTION update_updated_at_column()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.updated_at = CURRENT_TIMESTAMP;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_updated_at
+BEFORE UPDATE ON businesses
+FOR EACH ROW
+EXECUTE FUNCTION update_updated_at_column();
+
+
