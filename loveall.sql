@@ -186,7 +186,7 @@ CREATE TABLE business (
 );
 
 
-CREATE TABLE businesses (
+CREATE TABLE business(
     business_id SERIAL PRIMARY KEY,
     business_name VARCHAR(255) NOT NULL,
     business_email VARCHAR(255) UNIQUE NOT NULL,
@@ -219,7 +219,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER trigger_updated_at
-BEFORE UPDATE ON businesses
+BEFORE UPDATE ON business
 FOR EACH ROW
 EXECUTE FUNCTION update_updated_at_column();
 
